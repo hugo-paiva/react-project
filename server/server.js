@@ -29,8 +29,8 @@ server.post('/register', async (req, res) => {
     client.connect()
     const query = "INSERT INTO accounts (username, password, email) VALUES ($1, $2, $3)"
     const params = [username, password, email]
-    res = await client.query(query, params)
-    console.log(res.rows)
+    const result = await client.query(query, params)
+    console.log(result.rows)
     await client.end()
 
     res.send("tranks")
