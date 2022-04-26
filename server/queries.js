@@ -111,13 +111,14 @@ const login = async (req, res) => {
 
     const query = 'SELECT * FROM accounts WHERE username = $1'
     const json = await connection(query, [username])
-    if (json.content != []) {
+    if (json.content.length > 0) {
         bcrypt.compare(password, json.content[0].password, (error, itsTheSame) => {
             if (error) {
                 console.log(error)
             }
             json.content[0].isAuthenticated = itsTheSame
-            res.json(json)
+            res.send("Wrong password/username combination!")
+            // res.json(json)
         })
     } else {
         res.send("User doesn't exist!")
