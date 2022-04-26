@@ -1,4 +1,6 @@
 const { Client } = require('pg')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 function initClient() {
     return new Client({
@@ -89,23 +91,38 @@ const register = async (req, res) => {
     const password = req.body.password
     const email = req.body.email
 
-    const query = "INSERT INTO accounts (username, password, email) VALUES ($1, $2, $3)"
-    const params = [username, password, email]
-    const json = await connection(query, params)
+    bcrypt.hash(password, saltRounds, async (error, hash) => {
+        if (error) {
+            console.log(error)
+        }
+        
+        console.log(hash)
+        const query = "INSERT INTO accounts (username, password, email) VALUES ($1, $2, $3)"
+        const params = [username, hash, email]
+        const json = await connection(query, params)
 
-    res.json(json)
+        res.json(json)
+    })
 }
 
 const login = async (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const query = 'SELECT * FROM accounts WHERE username = $1 AND password = $2'
-    const params = [username, password]
-    const json = await connection(query, params)
-    console.log(json)
+    const query = 'SELECT * FROM accounts WHERE username = $1'
+    const json = await connection(query, [username])
+    if (json.content != []) {
+        bcrypt.compare(password, json.content[0].password, (error, itsTheSame) => {
+            if (error) {
+                console.log(error)
+            }
+            json.content[0].isAuthenticated = itsTheSame
+            res.json(json)
+        })
+    } else {
+        res.send("User doesn't exist!")
+    }
 
-    res.json(json)
 }
 
 

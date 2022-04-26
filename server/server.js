@@ -1,10 +1,20 @@
 const express = require('express');
 const server = express();
 const PORT = 4000;
-const bcrypt = require('bcrypt')
 const database = require('./queries')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const cors = require('cors')
 
 server.use(express.json())
+server.use(cors({
+    origin: ["*"],
+    methods: ["GET", "POST"],
+    credentials: true
+}))
+server.use(cookieParser())
+// server.use(bodyParser.urlencoded({extended: true}))
 
 server.get('/', (req, res) => {
     res.send("Funcionando!")
