@@ -1,6 +1,7 @@
 const { Client } = require('pg')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const jwt = require('jsonwebtoken')
 
 function initClient() {
     return new Client({
@@ -116,12 +117,22 @@ const login = async (req, res) => {
             if (error) {
                 console.log(error)
             }
+
             json.content[0].isAuthenticated = itsTheSame
-            res.send("Wrong password/username combination!")
-            // res.json(json)
+            if (itsTheSame) {
+                const id = json.content[0].user_id
+                const token = jwt.sign({id}, 'secret', {
+                    expiresIn: 30
+                })
+                console.log({authorized: true, token: token, result: json})
+
+                res.cookie('access_token', token, {httpOnly:true}).json({authorized: true, token: token, result: json})
+            } else {
+                res.json({auth: false, message: "Wrong password/username combination!"})
+            }
         })
     } else {
-        res.send("User doesn't exist!")
+        res.json({auth: false, message: "User doesn't exist!"})
     }
 
 }
