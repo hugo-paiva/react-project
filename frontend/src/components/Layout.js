@@ -1,8 +1,8 @@
 import React from "react";
 
 import Register from "./register/Register";
-import Login from "./login/Login"
-import App from "./athos/App.js"
+import Login from "./login/Login";
+import Main from "./mainPage/Main";
 
 export default class Layout extends React.Component {
   constructor(props) {
@@ -16,24 +16,20 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    if(this.state.currentPage === 'register') {
+    if(this.state.currentPage == 'register') {
         return <Register changeState={this.changeState} />
     }
 
-    if(this.state.currentPage === 'login') {
+    if(this.state.currentPage == 'login') {
         return <Login changeState={this.changeState} />
     }
 
-    if(this.state.currentPage === 'landingPage') {
-        return <Login changeState={this.changeState} />
+    if(this.state.currentPage == 'mainPage') {
+        return <Main changeState={this.changeState} />
     }
 
-    if(this.state.currentPage === 'editProfile') {
+    if(this.state.currentPage == 'editProfile') {
         return <Login changeState={this.changeState} />
-    }
-
-    if(this.state.currentPage === 'athosPage') {
-        return <App changeState={this.changeState} />
     }
   }
 };
