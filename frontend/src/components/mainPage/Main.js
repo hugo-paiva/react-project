@@ -11,7 +11,7 @@ export default class Main extends React.Component {
     fetch('http://localhost:9000/logout', {credentials: 'include'})
     .then(response => response.json())
     .then(data => console.log(data))
-    props('login')
+    props.changeState('login')
   }
 
   render() {
@@ -22,10 +22,10 @@ export default class Main extends React.Component {
           <span className="username">Malaquias</span>
           <div className="user--menu">
             <button className="activebtn">Dashboard</button>
-            <button>Edit Profile</button>
+            <button onClick={() => this.props.changeState('athosPage')}>Edit Profile</button>
             <button>Social</button>
             <button>Help</button>
-            <button onClick={() => this.logout(this.props.changeState)}>Logout</button>
+            <button onClick={() => this.logout(this.props)}>Logout</button>
           </div>
         </div>
         <div className='dash--panel'>
