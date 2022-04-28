@@ -1,6 +1,6 @@
 const express = require('express')
 const server = express()
-const PORT = 4000
+const PORT = 9000
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const database = require('./queries')
@@ -8,8 +8,8 @@ const verifyJWT = require('./verify')
 
 server.use(express.json())
 server.use(cors({
-    origin: ["*"],
-    methods: ["GET", "POST"],
+    origin: ['http://localhost:3001'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
     //lembre de colocar credentials: true no fetch também quando for configurar as requisições do front
 }))
@@ -27,5 +27,14 @@ server.get('/isUserAuth', verifyJWT, (req, res) => {
 server.post('/register', database.register)
 
 server.post('/login', database.login)
+
+server.get('/getForms', verifyJWT, database.getCustomers)
+
+server.post('/postForms', database.insertCustomer) // To usando no lugar do register
+
+server.put('/putForms', verifyJWT, database.updateCustomer)
+
+server.put('/deleteLogicalForms', verifyJWT, database.deleteCustomer)
+
 
 server.listen(PORT, () => console.log(`Server backend running on port ${PORT}`))

@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 function verifyJWT(req, res, next) {
     const token = (req.cookies.access_token)
-    console.log(req.cookies.access_token)
 
     if (!token) {
         res.send("Hey faltou mandar o token!")
