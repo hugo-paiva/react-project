@@ -42,7 +42,7 @@ export default class Login extends React.Component {
             console.log(data)
             if (data.authorized) {
               // avança para a pagina seguinte apenas se for autorizado pelo 
-              this.props.changeState('athosPage')
+              this.props.changeState('landingPage')
             }
         }).catch(error => {
             console.log(error)

@@ -10,9 +10,11 @@ export default class Register extends React.Component {
             name: "",
             email: "",
             phone: "",
-            password: ""
+            password: "",
+            fullName: ""
         };
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleFullNameChange = this.handleFullNameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -34,20 +36,24 @@ export default class Register extends React.Component {
     handlePhoneChange(event) {
         this.setState({ phone: event.target.value });
     }
+    j
+    handleFullNameChange(event) {
+        this.setState({ fullName: event.target.value });
+    }
 
     handleSubmit(event) {
         event.preventDefault();
         console.log("Nome: " + this.state.name);
         console.log("Email: " + this.state.email);
         console.log("Telefone: " + this.state.phone);
-        let data = new Date();
-        let dia = String(data.getDate()).padStart(2, '0');
-        let mes = String(data.getMonth() + 1).padStart(2, '0');
-        let ano = data.getFullYear();
-        let hora = data.getHours();
-        let minuto = data.getMinutes();
-        let segundo = data.getSeconds();
-        let dataAtual = dia + '/' + mes + '/' + ano +  ' - Horário: '  + hora + ':' + minuto + ':' + segundo;
+        let date = new Date();
+        let day = String(date.getDate()).padStart(2, '0');
+        let month = String(date.getMonth() + 1).padStart(2, '0');
+        let year = date.getFullYear();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let seconds = date.getSeconds();
+        let currentDate = day + '/' + month + '/' + year +  ' - Horário: '  + hour + ':' + minute + ':' + seconds;
         fetch("http://localhost:9000/postForms", {
             method: "POST",
             headers: {
@@ -57,8 +63,8 @@ export default class Register extends React.Component {
                 name: this.state.name,
                 email: this.state.email,
                 password: this.state.password,
-                phone: 94872984 ,
-                createAt: dataAtual
+                createAt: currentDate,
+                fullName: this.state.fullName
             })
         })
         .then(response => {
@@ -70,6 +76,7 @@ export default class Register extends React.Component {
                 email: "",
                 phone: "",
                 password: "",
+                fullName: ""
             })
             this.props.changeState('login')
         }).catch(error => {
@@ -87,7 +94,7 @@ export default class Register extends React.Component {
           </h1>
             <span className='register--subtitle'>Register</span>
           <form onSubmit={this.handleSubmit}>
-            <input spellCheck='false' type={'text'} className='input--field' placeholder='Full Name'></input>
+            <input spellCheck='false' type={'text'} className='input--field' placeholder='Full Name' value={this.state.fullName} onChange={this.handleFullNameChange}></input>
             <input spellCheck='false' type={'text'} className='input--field' placeholder='Username' value={this.state.name} onChange={this.handleNameChange}></input>
             <input spellCheck='false' type={'email'} className='input--field' placeholder='E-mail' value={this.state.email} onChange={this.handleEmailChange}></input>
             <input spellCheck='false' type={'password'} className='input--field' placeholder='Password' value={this.state.password} onChange={this.handlePasswordChange}></input>

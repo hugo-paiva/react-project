@@ -3,6 +3,7 @@ import React from "react";
 import Register from "./register/Register";
 import Login from "./login/Login"
 import App from "./athos/App.js"
+import Main from "./mainPage/Main"
 
 export default class Layout extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class Layout extends React.Component {
     }
 
     if(this.state.currentPage === 'landingPage') {
-        return <Login changeState={this.changeState} />
+        return <Main changeState={this.changeState} />
     }
 
     if(this.state.currentPage === 'editProfile') {
