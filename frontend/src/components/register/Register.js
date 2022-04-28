@@ -71,7 +71,7 @@ export default class Register extends React.Component {
                 phone: "",
                 password: "",
             })
-            this.props.changeState('athosPage')
+            this.props.changeState('login')
         }).catch(error => {
             console.log(error)
         })
