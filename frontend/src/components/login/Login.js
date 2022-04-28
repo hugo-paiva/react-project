@@ -39,7 +39,7 @@ export default class Login extends React.Component {
         .then(response => {
             return response.json()})
         .then(data => {
-            console.log(data.authorized)
+            console.log(data)
             if (data.authorized) {
               // avança para a pagina seguinte apenas se for autorizado pelo 
               this.props.changeState('athosPage')
