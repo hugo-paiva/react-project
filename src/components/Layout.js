@@ -4,20 +4,20 @@ import Register from "./register/Register";
 import Login from "./login/Login";
 import Main from "./mainPage/Main";
 
-// (gabriel)
-// EXCLUIR
-// add by gabriel
-// import BookList from '../components/BookList';
-
 export default class Layout extends React.Component {
   constructor(props) {
     super(props);
     this.changeState = this.changeState.bind(this);
-    this.state = {currentPage: 'register'}
+    this.changeModal = this.changeModal.bind(this);
+    this.state = {currentPage: 'register', mainModal: 'dashboard'}
   }
 
   changeState(newState) {
     this.setState({ currentPage: newState })
+  }
+
+  changeModal(newModal) {
+    this.setState({ mainModal: newModal })
   }
 
   render() {
@@ -30,17 +30,7 @@ export default class Layout extends React.Component {
     }
 
     if(this.state.currentPage == 'mainPage') {
-        return <Main changeState={this.changeState} />
+        return <Main changeState={this.changeState} modal={this.state.mainModal} changeModal={this.changeModal} />
     }
-
-    // (gabriel) tem dois <Login /> acho que deveria ser <EditProfile />
-    if(this.state.currentPage == 'editProfile') {
-        return <Login changeState={this.changeState} />
-    }
-
-    // (gabriel) acredito que quando eu criar o componente <BookList /> deve surgir esse novo "if".
-    // if(this.state.currentPage == 'booklist') {
-    //   return <BookList changeState={this.changeState} />
-    // }
   }
 };
