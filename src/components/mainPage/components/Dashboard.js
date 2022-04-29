@@ -5,7 +5,7 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         <h1 className="dash--title">Dashboard</h1>
-        <span className="dash--subtitle">Books</span>
+        <span className="dash--subtitle" onClick={this.props.changeState('booklist')} >Books</span>
         <ul className="activity--ul">
           <ul>
             <div className="ul--header">Recent activity</div>
@@ -33,6 +33,10 @@ export default class Dashboard extends React.Component {
             <li>Last book read: The Holy Bible</li>
           </ul>
         </ul>
+
+        {/**add by gabriel */}
+        {/* <button onClick={this.props.changeState('booklist')}>Book List</button> */}
+        {/*  */}
       </div>
     );
   }
