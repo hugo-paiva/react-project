@@ -6,10 +6,10 @@ export default class Login extends React.Component {
       constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            identifier: "",
             password: ""
         };
-        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleIdentifierChange = this.handleIdentifierChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -18,13 +18,13 @@ export default class Login extends React.Component {
         this.setState({ password: event.target.value });
     }
 
-    handleEmailChange(event) {
-        this.setState({ email: event.target.value });
+    handleIdentifierChange(event) {
+        this.setState({ identifier: event.target.value });
     }
     
     handleSubmit(event) {
         event.preventDefault();
-        console.log("Email: " + this.state.email);
+        console.log("identifier: " + this.state.identifier);
         fetch("http://localhost:9000/login", {
             method: "POST",
             credentials: 'include',
@@ -32,7 +32,7 @@ export default class Login extends React.Component {
                 "Content-Type": "application/json;charset=UTF-8",
             },
             body: JSON.stringify({
-                email: this.state.email,
+                identifier: this.state.identifier,
                 password: this.state.password,
             })
         })
@@ -57,7 +57,7 @@ export default class Login extends React.Component {
             MyHashProfiler
           </h1>
           <form onSubmit={this.handleSubmit}>
-            <input spellCheck='false' type={'text'} className='input--field' placeholder='Username or email' value={this.state.email} onChange={this.handleEmailChange}></input>
+            <input spellCheck='false' type={'text'} className='input--field' placeholder='Username or email' value={this.state.identifier} onChange={this.handleIdentifierChange}></input>
             <input spellCheck='false' type={'password'} className='input--field' placeholder='Password' onChange={this.handlePasswordChange}></input>
             <input type={'submit'} className='input--submit' value={'Login'} ></input>
           </form>
