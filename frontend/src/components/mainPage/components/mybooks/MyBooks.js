@@ -62,7 +62,7 @@ export default class BookList extends React.Component {
           </div>
           <div className="contentLine">
             <div className="content">
-              <abbr onMouseOver="">O pequeno principe</abbr>
+              <abbr>O pequeno principe</abbr>
             </div>
             <div className="content">
               <abbr>Fábula</abbr>
