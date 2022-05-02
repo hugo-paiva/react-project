@@ -20,6 +20,7 @@ function App() {
       <PutForms />
       <DeleteForms/>
       <GetForms/>
+      <LoadImages/>
     </div>
   );
 }
