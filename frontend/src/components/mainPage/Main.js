@@ -22,6 +22,7 @@ export default class Main extends React.Component {
       fullname: userData.fullname,
       username: userData.username,
       email: userData.email,
+      profile_picture: userData.profile_picture,
     }
     console.log(userData)
     console.log(`O state é ${this.state}`)
@@ -36,13 +37,21 @@ export default class Main extends React.Component {
       .then(data => console.log(data))
     props.changeState('login')
   }
+
+
+
   
   render() {
+    const myStyles = {
+      backgroundImage: `url('http://localhost:9000/static/ferrari.jpg')`
+    }
+    // TODO fazer isso atualizar a imagem de perfil automaticamente
+    this.getForms()
     if(this.props.modal === "dashboard") {
       return (
-        <div className="Layout" onLoad={this.getForms()}>
+        <div className="Layout">
           <div className="user--panel">
-            <div className="prof--picture"></div>
+            <div className="prof--picture" style={myStyles}></div>
             <span className="username">{this.state.forms.fullname}</span>
             {/* <span className="username">{this.state.forms.username}</span> */}
           {/* <span className="username">{this.state.forms.email}</span> */}
