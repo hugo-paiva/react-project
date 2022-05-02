@@ -9,6 +9,9 @@ import GetBooks from './components/getbooks';
 import PutBooks from './components/putbooks';
 import LoadImages from './components/loadimages';
 
+// (gabriel) add loadingImg
+import LoadImg from './loading-image';
+
 function App() {
   return (
     <div className="App">
@@ -20,6 +23,7 @@ function App() {
       <PutForms />
       <DeleteForms/>
       <GetForms/>
+      <LoadImg />
     </div>
   );
 }
