@@ -2,12 +2,12 @@ import React, {Fragment} from "react";
 import "./style.css";
 
 async function getForms() {
-    const response = await fetch("http://localhost:9000/getForms", {credentials: 'include'});
+    const response = await fetch("http://localhost:9000/getBooks", {credentials: 'include'});
     const data = await response.json();
     return data;
 }
 
-class GetForms extends React.Component {
+class GetBooks extends React.Component {
     constructor(props) {
         super(props);
         this.state = {      
@@ -18,6 +18,7 @@ class GetForms extends React.Component {
     //Usa-se o método componentDidMount para preencher o state do componente com os dados do servidor/api
     componentDidMount() {//método do React que é chamado quando o componente está sendo montado no DOM pela primeira vez. Ou seja, o componentDidMount é chamado apenas uma vez.
         getForms().then((data) => {
+            console.log(data);
             this.setState(state => ({
                 forms: data
             }));
@@ -49,9 +50,11 @@ class GetForms extends React.Component {
         let forms = this.state.forms.map((form) => 
                     <tr key={form.id}>
                         <td>{form.id}</td>
-                        <td>{form.name}</td>
-                        <td>{form.email}</td>
-                        <td>{form.phone}</td>
+                        <td>{form.title}</td>
+                        <td>{form.author}</td>
+                        <td>{form.publisher}</td>
+                        <td>{form.gender}</td>
+                        <td>{form.pub_year}</td>
                     </tr>
         );
         return forms;
@@ -61,13 +64,15 @@ class GetForms extends React.Component {
         return (
             <Fragment>
                 <hr/>
-                <table >
-                    <tbody >
+                <table className="forms-books">
+                    <tbody>
                         <tr>
                             <th>ID</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Editora</th>
+                            <th>Gênero</th>
+                            <th>Ano da Publicação</th>
                         </tr>
                         {this.AllForms()}
                     </tbody>
@@ -77,4 +82,4 @@ class GetForms extends React.Component {
     }
 }
 
-export default GetForms;
+export default GetBooks;

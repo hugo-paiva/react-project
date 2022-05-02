@@ -14,21 +14,21 @@ export default class Main extends React.Component {
     
   }
 
+  // static object = {
+  //   userData : getForms()
+  // }
+
   async getForms() {
     const response = await fetch("http://localhost:9000/getForms", { credentials: 'include' });
     const data = await response.json();
     const userData = data[0]
-    this.state = {
-      fullname: userData.fullname,
-      username: userData.username,
-      email: userData.email,
-      profile_picture: userData.profile_picture,
-    }
+    // this.state = {
+    //   fullname: userData.fullname,
+    //   username: userData.username,
+    //   email: userData.email,
+    // }
     console.log(userData)
-    console.log(`O state é ${this.state}`)
-            this.setState(state => ({
-                forms: userData
-            }));
+            return userData
   }
 
   logout(props) {
@@ -37,22 +37,15 @@ export default class Main extends React.Component {
       .then(data => console.log(data))
     props.changeState('login')
   }
-
-
-
   
   render() {
-    const myStyles = {
-      backgroundImage: `url('http://localhost:9000/static/ferrari.jpg')`
-    }
-    // TODO fazer isso atualizar a imagem de perfil automaticamente
     this.getForms()
     if(this.props.modal === "dashboard") {
       return (
         <div className="Layout">
           <div className="user--panel">
-            <div className="prof--picture" style={myStyles}></div>
-            <span className="username">{this.state.forms.fullname}</span>
+            <div className="prof--picture"></div>
+            <span className="username">malaquias</span>
             {/* <span className="username">{this.state.forms.username}</span> */}
           {/* <span className="username">{this.state.forms.email}</span> */}
             <div className="user--menu">
@@ -75,10 +68,10 @@ export default class Main extends React.Component {
 
     if (this.props.modal === 'editprofile') {
       return (
-        <div className="Layout" onLoad={this.getForms()}>
+        <div className="Layout">
           <div className="user--panel">
             <div className="prof--picture"></div>
-            <span className="username">{this.state.forms.fullname}</span>
+            <span className="username">malaquias</span>
             {/* <span className="username">{this.state.forms.username}</span> */}
           {/* <span className="username">{this.state.forms.email}</span> */}
             <div className="user--menu">
@@ -101,10 +94,10 @@ export default class Main extends React.Component {
 
     if(this.props.modal === "mybooks") {
       return (
-        <div className="Layout" onLoad={this.getForms()}>
+        <div className="Layout">
           <div className="user--panel">
             <div className="prof--picture"></div>
-            <span className="username">{this.state.forms.fullname}</span>
+            <span className="username">malaquias</span>
             {/* <span className="username">{this.state.forms.username}</span> */}
           {/* <span className="username">{this.state.forms.email}</span> */}
             <div className="user--menu">

@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
     super(props);
     this.changeState = this.changeState.bind(this);
     this.changeModal = this.changeModal.bind(this);
-    this.state = {currentPage: 'register', mainModal: 'dashboard'}
+    this.state = {currentPage: 'login', mainModal: 'dashboard'}
   }
 
   changeState(newState) {
