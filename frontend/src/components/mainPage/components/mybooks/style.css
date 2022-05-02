@@ -1,0 +1,28 @@
+.headerContentLine {
+  display: flex;
+  background-color: #8ba18b;
+  color: white;
+}
+
+.tableContent {
+  height: 50vh;
+  overflow: overlay;
+}
+
+.contentLine {
+  display: flex;
+}
+
+.content {
+  width: 9vw;
+  height: 10vh;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.headerContentLine .content {
+  height: 5vh;
+}
