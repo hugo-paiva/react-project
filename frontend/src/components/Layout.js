@@ -21,15 +21,19 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    if(this.state.currentPage == 'register') {
+    if(this.state.currentPage === 'register') {
         return <Register changeState={this.changeState} />
     }
 
-    if(this.state.currentPage == 'login') {
+    if(this.state.currentPage === 'login') {
         return <Login changeState={this.changeState} />
     }
 
-    if(this.state.currentPage == 'mainPage') {
+    if(this.state.currentPage === 'athosPage') {
+      return <App changeState={this.changeState} />
+  }
+
+    if(this.state.currentPage === 'mainPage') {
         return <Main changeState={this.changeState} modal={this.state.mainModal} changeModal={this.changeModal} />
     }
   }
