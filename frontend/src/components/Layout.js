@@ -3,6 +3,7 @@ import React from "react";
 import Register from "./register/Register";
 import Login from "./login/Login";
 import Main from "./mainPage/Main";
+import App from "./athos/App";
 
 export default class Layout extends React.Component {
   constructor(props) {
